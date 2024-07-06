@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      "incremental": true, // Enable incremental compilation
+  
+  
+      /* Language and Environment */
+      "target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+  
+      /* Modules */
+      "module": "commonjs" /* Specify what module code is generated. */,
+      "outDir": "./dist", // Output directory for compiled code
+      "rootDir": "./api", // Source directory
+      "types": [
+        "node"
+      ] /* Specify type package names to be included without being referenced in a source file. */,
+  
+      /* Type checking */
+      "strict": true, // Enable strict type checking
+      "noImplicitAny": true,
+      "esModuleInterop": true, // Enable interop with CommonJS modules
+      "resolveJsonModule": true, // Enable importing JSON files as modules
+      "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+      // "allowImportingTsExtensions": true, /* Allow import paths that end with .ts. */
+      "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */,
+      "experimentalDecorators": true,
+      /* Completeness */
+      "skipLibCheck": true
+    },  "include": ["api"], // Specify the files to include in the compilation
+    "exclude": [     // Specify files to exclude from compilation
+      // "**/*__tests__"
+    ]
+  }

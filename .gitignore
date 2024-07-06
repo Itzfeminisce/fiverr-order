@@ -1,0 +1,8 @@
+node_modules
+database.sqlite
+.env
+tsconfig.tsbuildinfo
+.vercel
+.vscode
+dist
+backup
