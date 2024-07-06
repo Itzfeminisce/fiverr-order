@@ -24,5 +24,3 @@ dist-ssr
 *.sw?
 .vite
 .vscode
-tsconfig.app.json
-tsconfig.json
