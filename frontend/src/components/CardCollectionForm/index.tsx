@@ -5,49 +5,12 @@ import AmericanXpressLogo from "../../assets/amex.svg"
 import MasterCardLogo from "../../assets/mastercard.svg"
 import GooglePayLogo from "../../assets/googlepay.svg"
 import { FC } from 'react'
-// import Loader from '../Loader'
-// import CollectBalanceModal from '../CollectBalanceModal'
-// import useFakePromise from '../../hooks/useFakePromise'
-// import Modal from '../Modal'
-// import OtpVerificationModal from '../OtpVerificationModal'
-// import useCreateCard from '../../hooks/useCreateCard'
 
 
-const CardCollectionForm: FC<Disclosure> = ({formData,handleChange,handleSubmit,errors,loading}) => {
-
-    // const { create, formData, handleChange, errors,loading } = useCreateCard()
-
-    // const promise = useFakePromise()
-
-    // const [balance, showBalance] = useState(false)
-    // const [otp, showOtp] = useState(false)
-
-
-    // const handleSubmitOtp = async () => {
-    //     showBalance(false)
-    //     await promise.wait()
-    //     showOtp(true)
-    // }
-
-    // const handleSubmitCard = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-    //     try {
-    //         const response = await create()
-    //         console.log("🚀 ~ handleSubmitCard ~ response:", response)
-    //         showBalance(true)
-    //     } catch (error) {
-    //     }
-    // }
+const CardCollectionForm: FC<Disclosure> = ({ formData, handleChange, handleSubmit, errors, loading }) => {
 
     return (
         <>
-            {/* <Loader isLoading={loading} /> */}
-            {/* {balance && <Modal><CollectBalanceModal handleChange={()=>{}} handleSubmit={handleSubmitOtp} /></Modal>} */}
-
-            {/** @ts-ignore */}
-            {/* {otp && <Modal> <OtpVerificationModal onShow={() => { }} /></Modal>} */}
-
-
             <div className="bg-gray-100 pt-4 max-w-sm mx-auto border border-gray-200">
                 <div className="flex items-center justify-start gap-x-2 mx-4">
                     <Image src={StoreLogo} alt="visa" className="w-7 bg-white p-1 rounded-full shadow-md" />
@@ -58,10 +21,10 @@ const CardCollectionForm: FC<Disclosure> = ({formData,handleChange,handleSubmit,
                     <h2 className='text-2xl text-black font-semibold '>Verify</h2>
                     <p className='text-sm text-gray-400 font-semibold'>Transaction #678987654678</p>
                 </div>
-
+                {errors && <p className='text-sm p-2 font-semibold text-center'>{errors}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="bg-white p-4 mx-auto space-y-4">
-                    <p className='text-sm text-red-500 font-semibold text-center'>{errors}</p>
+                        <p className='text-sm text-red-500 font-semibold text-center'>{errors}</p>
                         <div className="p-4 bg-gray-50 border-gray-200 border  rounded-md shadow gap-x-6 flex items-center">
                             <p className='text-sm font-semibold text-gray-500'>Fiverr</p>
                             <p className='text-sm font-semibold ml-6 text-gray-500'>Details</p>

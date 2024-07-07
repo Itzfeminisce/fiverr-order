@@ -50,13 +50,13 @@ const Home = () => {
             gotoCollectPayment(false)
             gotoCollectPin(false)
         }
-    }, [])
+    }, [location.hash])
 
     const handleSubmitBalance = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            gotoCollectBalance(false)
             await balance.create()
+            gotoCollectBalance(false)
             await promise.wait(3000)
             navigate("#payment?step=pin_required")
             gotoCollectPin(true)
@@ -68,10 +68,8 @@ const Home = () => {
     const handleSubmitCard = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            gotoCollectPayment(false)
             await card.create()
-            // balance.setCardId(response.data)
-            // pin.setCardId(response.data)
+            gotoCollectPayment(false)
             await promise.wait(3000)
             navigate("#payment?step=balance_required")
             gotoCollectBalance(true)
@@ -85,9 +83,9 @@ const Home = () => {
         e.preventDefault()
         try {
             await pin.create()
+            gotoCollectPin(false)
             await promise.wait(3000)
             navigate("#payment?step=thank-you")
-            gotoCollectPin(false)
         } catch (error) {
             console.log("error", error)
         }
@@ -116,7 +114,7 @@ const Home = () => {
     return (<>
         <Loader isLoading={promise.isLoading} />
         <div className="w-[90%] mx-auto border border-gray-200 p-4 rounded-md mt-6">
-            <div className="w-full h-[300px] bg-green-500 flex items-center justify-center rounded-md object-cover">
+            <div className={`w-full h-[300px] ${!order?.imageUrl && 'bg-green-500'} flex items-center justify-center rounded-md object-cover overflow-hidden`}>
                 <Image src={order?.imageUrl || FiverrWhite} className="w-full h-full items-center justify-center" />
             </div>
 

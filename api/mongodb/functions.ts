@@ -106,6 +106,7 @@ export const updateCardPaymentReference = async (id: string, payload: Pick<Card,
 
 export const createGig = async (req: Request, res: Response) => {
     const { gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price } = req.body;
+    console.log("🚀 ~ createGig ~ { gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price }:", { gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price })
   
     const newGig = new GigModel({
       gigId,
