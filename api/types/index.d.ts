@@ -82,4 +82,5 @@ interface Gig {
   rating: number;
   numberOfReviews: number;
   price: number;
+  gigMessage: string;
 }

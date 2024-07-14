@@ -16,6 +16,7 @@ interface CreateGigFormData {
   rating: string;
   numberOfReviews: string;
   price: string;
+  gigMessage: string;
 }
 
 interface CardBalance {

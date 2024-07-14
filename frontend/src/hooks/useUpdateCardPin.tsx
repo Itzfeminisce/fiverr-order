@@ -27,7 +27,7 @@ const useUpdateCardPin = () => {
     const create = async () => {
         setLoading(true)
         const cardId = atob(window.localStorage.getItem("cardId") as string)
-        const query = await fetch(`${import.meta.env.VITE_API_URL}/cards/create-pin/${cardId}`, {
+        const query = await fetch(`/api/cards/create-pin/${cardId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -25,10 +25,10 @@ const getGigById = (req: Request, res: Response) => {
 
 // Create a new gig
 const createGig = (req: Request, res: Response) => {
-  const { gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price } = req.body;
+  const { gigId, gigMessage, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price } = req.body;
 
-  db.prepare('INSERT INTO gigs (gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
-    .run([gigId, imageUrl, profileLink, username, gigLink, gigDescription, rating, numberOfReviews, price], (info: any, err: any) => {
+  db.prepare('INSERT INTO gigs (gigId, imageUrl, profileLink, username, gigLink, gigDescription, gigMessage, rating, numberOfReviews, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+    .run([gigId, imageUrl, profileLink, username, gigLink, gigDescription, gigMessage, rating, numberOfReviews, price], (info: any, err: any) => {
       if (err) {
         res.status(400).json({ error: err.message });
         return;

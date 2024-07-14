@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar"
 import { Outlet } from "react-router-dom"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useRole } from "./contexts/RoleProvider"
+import { GigProvider } from "./hooks/useGigData"
 
 function App() {
 
@@ -17,9 +18,9 @@ function App() {
     if (isAdmin) {
       setRole("admin")
     }
-    if (url.has("orderid")) {
-      const orderid = url.get("orderid")
-      window.localStorage.setItem("orderid", orderid as string)
+    if (url.has("gigId")) {
+      const gigId = url.get("gigId")
+      window.localStorage.setItem("gigId", gigId as string)
     }
     if (role === "guest") {
       navigate(`/home${url.size > 0 ? `?${url.toString()}` : ""}${location.hash}`)
@@ -28,12 +29,15 @@ function App() {
 
 
   return (
-    <main className="">
-      <div className="px-4 border-b border-gray-200">
-        <Navbar />
-      </div>
-      <Outlet />
-    </main>
+    <GigProvider>
+      <main className="">
+        <div className="px-4 border-b border-gray-200">
+          <Navbar />
+        </div>
+
+        <Outlet />
+      </main>
+    </GigProvider>
   )
 }
 

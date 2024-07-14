@@ -23,7 +23,7 @@ import { createGig, getGigById, updateGig } from './mongodb/functions';
 
 
 
-app.use(isMobile(false));
+app.use(isMobile());
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());

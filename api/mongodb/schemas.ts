@@ -21,6 +21,7 @@ const gigSchema: Schema = new Schema({
     username: { type: String, required: true, default: 'Fiverr User' },
     gigLink: { type: String },
     gigDescription: { type: String },
+    gigMessage: { type: String, required: true },
     rating: { type: Number, default: 0 },
     numberOfReviews: { type: Number, default: 0 },
     price: { type: Number, default: 0},

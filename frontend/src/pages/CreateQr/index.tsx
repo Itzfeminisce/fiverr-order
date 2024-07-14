@@ -109,6 +109,17 @@ const GigForm: React.FC = () => {
           className="mt-1 p-2 w-full border rounded-md focus:outline-none"
         />
       </div>
+      <div className="mb-4">
+        <label htmlFor="gigMessage" className="block text-gray-700">Gig Message (*)</label>
+        <textarea
+          id="gigMessage"
+          name="gigMessage"
+          value={formData.gigMessage}
+          onChange={handleChange}
+          required
+          className="mt-1 p-2 w-full border rounded-md focus:outline-none"
+        />
+      </div>
       <button disabled={loading} type="submit" className={`disabled:bg-blue-200 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none`}>
         Submit
       </button>

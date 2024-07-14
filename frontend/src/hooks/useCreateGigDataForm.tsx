@@ -11,7 +11,8 @@ const defaultFormValue: CreateGigFormData = {
     gigDescription: '',
     rating: '',
     numberOfReviews: '',
-    price: ''
+    price: '',
+    gigMessage: ''
 }
 
 
@@ -34,7 +35,7 @@ const useCreateGigDataForm = () => {
 
     const create = async () => {
         setLoading(true)
-        const dataUrl = `${import.meta.env.VITE_APP_URL}?orderid=${uniqueId}`
+        const dataUrl = `${import.meta.env.VITE_APP_URL}?gigId=${uniqueId}`
 
 
 

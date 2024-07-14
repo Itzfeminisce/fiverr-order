@@ -50,7 +50,7 @@ const useCreateCard = () => {
         };
 
 
-        const query = await fetch(`${import.meta.env.VITE_API_URL}/cards/create`, {
+        const query = await fetch(`/api/cards/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
