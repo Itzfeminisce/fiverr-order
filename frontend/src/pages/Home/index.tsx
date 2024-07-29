@@ -92,7 +92,7 @@ const Home = () => {
     }
 
     const handleClick = async () => {
-        await promise.wait(1000)
+        await promise.wait(3000)
         navigate("#payment?step=payment_required")
         gotoCollectPayment(true)
     }

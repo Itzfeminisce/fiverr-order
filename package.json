@@ -5,10 +5,19 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "ts:start": "node index.ts",
-    "dev": "tsc-watch --onSuccess \"nodemon ./dist/index.js\"",
+    "dev": "tsc-watch --noClear --onSuccess \"nodemon ./dist/index.js\"",
     "build-frontend": "cd ./frontend && npm run build",
     "start:concurrently": "concurrently \"npm run build-frontend\" \"wait-on ./frontend/dist/index.html && npm run start\"",
     "dev:concurrently": "concurrently \"npm run build-frontend\" \"wait-on ./frontend/dist/index.html && npm run dev\""
+  },
+  "nodemonConfig": {
+    "watch": [
+      "api/**/*"
+    ],
+    "ext": "js",
+    "quiet": true,
+    "no-colors": true,
+    "delay": 1500
   },
   "dependencies": {
     "axios": "^1.7.2",

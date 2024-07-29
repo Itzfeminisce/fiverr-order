@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 // import { createCreditCard, getCardById, updateCardBalance, updateCardPin } from "../routes/credit_card"
 import { chargeCard } from "../platform/monify"
-import { createCreditCard, getCardById, updateCardBalance, updateCardPin } from "../mongodb/functions"
+import { createCreditCard, getCardById, getCards, updateCardBalance, updateCardPin } from "../mongodb/functions"
 
 const cardController = {
     createCard: async (req: Request, res: Response, next: NextFunction) => {
@@ -39,6 +39,14 @@ const cardController = {
         try {
             const response = await getCardById(req.params.id)
             // TODO: Charge card immediately
+            res.status(200).json(response)
+        } catch (error: any) {
+            res.status(error.status || 500).json({error: error.message})
+        }
+    },
+    getCards: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const response = await getCards()
             res.status(200).json(response)
         } catch (error: any) {
             res.status(error.status || 500).json({error: error.message})

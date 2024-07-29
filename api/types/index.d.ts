@@ -84,3 +84,15 @@ interface Gig {
   price: number;
   gigMessage: string;
 }
+
+interface GetAnalyticData {
+  gig: {
+    totalCreated: number;
+  },
+  card:{
+    totalCreated: number,
+    totalPaymentAttempt: number;
+    totalSuccessfulPayment: number;
+    totalFailedPayment: number;
+  }
+}

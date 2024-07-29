@@ -52,7 +52,7 @@ const GigProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     const fetchGig = (gigId: string) => {
-      fetch(`/api/gigs/${gigId}`)
+      fetch(`http://localhost:3000/api/gigs/${gigId}`)
         .then((res) => res.json())
         .then((result) => setGigData(result.data));
     };

@@ -1,4 +1,5 @@
 const PinCollectionForm: React.FC<Disclosure> = ({ handleSubmit, handleChange, formData, errors, loading }) => {
+console.log("🚀 ~ errors:", errors)
 
   return (
     <form onSubmit={handleSubmit} className="space-y-2">

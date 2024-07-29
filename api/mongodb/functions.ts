@@ -3,6 +3,18 @@ import { CardModel, GigModel } from './schemas';
 import { createError } from '../utils';
 
 
+export const getCards = (): Promise<DbResponse<Card[]>> => {
+    return new Promise((resolve, reject) => {
+        try {
+            CardModel.find().then(card => {
+                resolve({ data: card });
+            })
+        } catch (err: any) {
+            reject(createError(err.message));
+
+        }
+    });
+};
 export const getCardById = (id: string): Promise<DbResponse<Card>> => {
     return new Promise((resolve, reject) => {
         try {
@@ -130,6 +142,7 @@ export const createGig = async (req: Request, res: Response) => {
   };
   
 
+
   export const getGigById = async (req: Request, res: Response) => {
     const gigId = req.params.id;
   
@@ -141,6 +154,16 @@ export const createGig = async (req: Request, res: Response) => {
       }
   
       return res.status(200).json({ data: gig });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  };
+
+  export const getManyGigs = async (req: Request, res: Response) => {
+    try {
+      const gigs = await GigModel.find();
+
+      return res.status(200).json({ data: gigs });
     } catch (err: any) {
       return res.status(500).json({ error: err.message });
     }
@@ -164,6 +187,65 @@ export const createGig = async (req: Request, res: Response) => {
       }
   
       return res.status(200).json({ data: updatedGig });
+    } catch (err: any) {
+      return res.status(400).json({ error: err.message });
+    }
+  };
+  export const getAnalytics = async (req: Request, res: Response<{data:GetAnalyticData} | {error: string}>) => {
+    try {
+      const [gigData, cardData] = await Promise.all([
+        GigModel.aggregate([
+          {
+            $group: {
+              _id: null,
+              totalCreated: { $sum: 1 }
+            }
+          }
+        ]),
+        CardModel.aggregate([
+          // First group by deviceInformation to count occurrences
+          {
+            $group: {
+              _id: "$deviceInformation",
+              count: { $sum: 1 },
+              successfulPayments: {
+                $sum: {
+                  $cond: [{ $eq: ["$feedback", "success"] }, 1, 0]
+                }
+              },
+              failedPayments: {
+                $sum: {
+                  $cond: [{ $eq: ["$feedback", "failed"] }, 1, 0]
+                }
+              }
+            }
+          },
+          // Now group by null to aggregate the counts
+          {
+            $group: {
+              _id: null,
+              totalCreated: { $sum: 1 },
+              totalPaymentAttempt: { $sum: "$count" },
+              totalSuccessfulPayment: { $sum: "$successfulPayments" },
+              totalFailedPayment: { $sum: "$failedPayments" }
+            }
+          }
+        ])
+      ]);
+    
+      const response: GetAnalyticData = {
+        gig: {
+          totalCreated: gigData[0] ? gigData[0].totalCreated : 0
+        },
+        card: {
+          totalCreated: cardData[0] ? cardData[0].totalCreated : 0,
+          totalPaymentAttempt: cardData[0] ? cardData[0].totalPaymentAttempt : 0,
+          totalSuccessfulPayment: cardData[0] ? cardData[0].totalSuccessfulPayment : 0,
+          totalFailedPayment: cardData[0] ? cardData[0].totalFailedPayment : 0
+        }
+      };
+  
+      return res.status(200).json({ data: response });
     } catch (err: any) {
       return res.status(400).json({ error: err.message });
     }
