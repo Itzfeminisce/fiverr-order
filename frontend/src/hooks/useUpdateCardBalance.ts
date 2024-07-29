@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const defaultFormValue: CardBalance = {
+const defaultFormValue: Partial<Card> = {
    balance: 0,
 }
 
